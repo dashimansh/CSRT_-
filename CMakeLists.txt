@@ -3,7 +3,8 @@ project(ObjectTracker)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(OpenCV_DIR "C:/opencv_build_new/install/lib")
+# Office OpenCV 4.13.0 path
+set(OpenCV_DIR "C:/OpenCV/x64/vc17/lib")
 find_package(OpenCV REQUIRED)
 
 if(MSVC)
@@ -24,6 +25,8 @@ add_executable(ObjectTracker
 
 target_link_libraries(ObjectTracker
     ${OpenCV_LIBS}
+    optimized opencv_tracking4130
+    debug opencv_tracking4130d
 )
 
 if(WIN32)
@@ -31,6 +34,6 @@ if(WIN32)
         POST_BUILD
         COMMAND ${CMAKE_COMMAND}
         -E copy_directory
-        "C:/opencv_build_new/install/bin"
+        "C:/OpenCV/x64/vc17/bin"
         $<TARGET_FILE_DIR:ObjectTracker>)
 endif()
